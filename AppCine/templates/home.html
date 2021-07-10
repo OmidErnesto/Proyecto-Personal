@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pagina de Inicio</title>
+    </head>
+    <body>
+        <h1>Esta es la pagina de inicio</h1>
+
+        {% for pelicula in peliculas %}
+
+        
+        <div class="destination_content">
+            <div class="Pelicula_titulo"><p>{{ pelicula.titulo }}</p></div>
+            <div class="Pelicula_genero"><p>Genero:{{ pelicula.genero }}</p></div>
+            {% if pelicula.edad %}
+            <div class="Pelicula_edad"><p> Para mayores de 18</p></div>
+            {% else %}
+            <div class="Pelicula_edad"><p> Para todo publico</p></div>
+            {% endif %}
+            <div class="Pelicula_idioma"><p>{{ pelicula.idioma }}</p></div>
+        </div>
+
+        {% endfor %}
+
+    </body>
+</html>
