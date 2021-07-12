@@ -1,21 +1,22 @@
 from django.db import models
+from django.urls import reverse
 
 class Pelicula(models.Model):
     titulo = models.CharField(max_length=30,primary_key=True)
     gen = [
-        ("T","Terror"),
-        ("D","Drama"),
-        ("C","Comedia"),
-        ("A","Accion"),
-        ("S","Suspenso")
+        ("Terror","Terror"),
+        ("Drama","Drama"),
+        ("Comedia","Comedia"),
+        ("Accion","Accion"),
+        ("Suspenso","Suspenso")
     ]
-    genero = models.CharField(max_length=1,choices=gen)
+    genero = models.CharField(max_length=20,choices=gen)
     edad = models.BooleanField()   # Mayores o menores de 18
     idim = [
-        ("I","Ingles"),
-        ("E","Español"),
+        ("Ingles","Ingles"),
+        ("Español","Español"),
     ]
-    idioma = models.CharField(max_length=1,choices=idim)
+    idioma = models.CharField(max_length=20,choices=idim)
     #duracion =
     #sinopsis =  models.ForeignKey(Sinopsis, blank=False, on_delete=models.CASCADE)
 
@@ -23,12 +24,14 @@ class Pelicula(models.Model):
         texto = "{0}"
         return texto.format(self.titulo)
 
+    def get_absolute_url(self):
+        return reverse('AppCine:Peliculas', kwargs={'myID': self.id })
+
 class UsuarioCliente (models.Model):
     IdCliente = models.IntegerField(primary_key=True)
     nombres = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=20)
     edad = models.IntegerField()
-    pelicula = models.ForeignKey(Pelicula,blank=False,on_delete=models.CASCADE)
     dni = models.CharField(max_length=8)
     correo = models.EmailField(max_length=50)
     #cliente
@@ -45,7 +48,7 @@ class Sala(models.Model):
 class Reserva(models.Model):
     #tipo de cliente
     #Pelicula = UsuarioCliente.pelicula
-    hora = models.CharField(max_length=8)
+    hora = models.CharField(max_length=15)
     sala = models.ForeignKey(Sala,blank=False,on_delete=models.CASCADE)
 
 class Promocion(models.Model):
