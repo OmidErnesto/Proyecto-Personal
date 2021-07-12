@@ -19,7 +19,7 @@ class Pelicula(models.Model):
     idioma = models.CharField(max_length=20,choices=idim)
     #duracion =
     #sinopsis =  models.ForeignKey(Sinopsis, blank=False, on_delete=models.CASCADE)
-
+    img = models.ImageField(upload_to='pics')
     def __str__(self):
         texto = "{0}"
         return texto.format(self.titulo)

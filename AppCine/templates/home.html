@@ -6,6 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pagina de Inicio</title>
     </head>
+    <style>
+      .imgPelis{
+          width: 300px;
+          height: 350px;
+      }
+      .imgPelis img{
+        width: 100%;
+        height: auto;
+      }
+      @supports(object-fit: cover){
+          .imgPelis img{
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+          }
+      }
+    </style>
     <body>
         <h1>Esta es la pagina de inicio</h1>
         <a href="crearPeliculas">Agregar Pelicula</a>
@@ -35,8 +52,11 @@
             {% endif %}
             <div class="Pelicula_idioma"><p>Idioma:{{ pelicula.idioma }}</p></div>
         </div>
-
+        <div class="imgPelis">
+            <img class="img" src="{{pelicula.img.url}}" alt="">
+        </div>
         {% endfor %}
+        
 
 
     </body>
